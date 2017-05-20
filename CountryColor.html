@@ -64,14 +64,14 @@
         	  radius: Math.sqrt(citymap[city].population) * 100
         	});
 
-        	cityCircle.addListener('mouseover', function() {
-        		infoWindow.setPosition(citymap[city].center);
-        		infoWindow.open(map);
+        	google.maps.event.addListener(cityCircle, 'mouseover', function(ev){
+        	    infoWindow.setPosition(ev.latLng); //<-- ev matches what you put ^ (mouse event)
+        	    infoWindow.open(map);
         	});
 
-        	cityCircle.addListener('mouseout', function() {
+        	/*cityCircle.addListener('mouseout', function() {
         		infoWindow.close();
-        	});
+        	});*/
         }
       }
     </script>
