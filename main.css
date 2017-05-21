@@ -1,14 +1,19 @@
+html, body { 
+	height: 100%; 
+	width: 100%; 
+	margin: 0; 
+}
+
 #map {
-	height: 400px;
+	height: 80%;
 	width: 100%;
 }
 
 h1 {
-	font-family: "Merriweather", serif;
+	font-family: "Verdana";
 	text-align: center;
 	font-size: 40px;
-	letter-spacing: 5px;
-	color: rgb(40, 40, 40);
+	color: white;
 }
 
 div.page-title {
@@ -20,5 +25,5 @@ div.page-title {
 }
 
 body {
-	background-color: AntiqueWhite;
+	background-color: rgb(150, 175, 175);
 }

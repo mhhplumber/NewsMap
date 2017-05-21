@@ -14,8 +14,10 @@ var weight;
 
 var locale[];
 
-function article(article) {
+function article(article, weight, locale[]) {
 	this = JSON.parse(article)
+	this.weight = weight;
+	this.locale[] = locale;
 }
 
 function setImage(elementID) {
