@@ -20,22 +20,22 @@ function article(article) {
 	this.publishedAt = temp.publishedAt;
 }
 
-function setImage(elementID) {
+setImage : function (elementID) {
 	document.getElementByID(elementID).src = this.urlToImage;
 }
 
-function setTitle(elementID) {
+setTitle : function (elementID) {
 	document.getElementByID(elementID).innerHTML = this.title;
 }
 
-function setDescription(elementID) {
+setDescription : function (elementID) {
 	document.getElementByID(elementID).innerHTML = this.description;
 }
 
-function setURL(elementID) {
+setURL : function (elementID) {
 	document.getElementByID(elementID).src = this.url;
 }
 
-function setPublishedDate(elementID) {
+setPublishedDate : function (elementID) {
 	document.getElementByID(elementID).title = this.publishedAt;
 }
