@@ -10,7 +10,7 @@
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
-        height: 80%;
+        height: 95%;
         margin: 0;
         padding: 0;
       }
@@ -18,8 +18,9 @@
   </head>
   <body>
     <div id="map"></div>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script>
-    var citymap = {
+    /*var citymap = {
       chicago: {
         center: {lat: 41.878, lng: -87.629},
         population: 2714856
@@ -36,7 +37,8 @@
         center: {lat: 49.25, lng: -123.1},
         population: 603502
       }
-    };
+    };*/
+    var cities = ['seattle, us', 'miami, fl', 'kansas', 'sri lanka'];
 
       var map;
       function initMap() {
@@ -49,10 +51,47 @@
         // Create a <script> tag and set the USGS URL as the source.
         //var script = document.createElement('script');
         var infoWindow = new google.maps.InfoWindow({
-        	content: "News Title: "
-        });
+<<<<<<< HEAD
+        	content: '<h1 = id="article-name"> </h1>' +
+        			 '<img id="article-img">' +
+        			 '<p id="description"></p>' +
+        			 '<p id="link"><a></a></p>' +
+        			 '<p id="image-url"><a href=""></a></p>' +
+        			 '<p id="where-published"></p>' +
+        			 'Test'
 
-        for (var city in citymap) {
+=======
+        	content: "News Title: "
+>>>>>>> e88f68a726f8f8ec2c0f2de3def88b5f24276b38
+        });
+        
+        var geocoder = new google.maps.Geocoder();
+        for (var city in cities) {
+        geocoder.geocode({'address': cities[city]}, function(results, status) {
+
+          if (status == google.maps.GeocoderStatus.OK) {
+
+            //map.setCenter(results[0].geometry.location);
+            var cityCircle = new google.maps.Circle({
+              strokeColor: 'black',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: 'green',
+              fillOpacity: 0.35,
+              map: map,
+              center: results[0].geometry.location,
+              radius: 500000
+            });
+            google.maps.event.addListener(cityCircle, 'mouseover', function(ev){
+                infoWindow.setPosition(ev.latLng); //<-- ev matches what you put ^ (mouse event)
+                infoWindow.open(map);
+            });
+            //map.setZoom(10);
+          }
+        });
+      }
+
+        /*for (var city in citymap) {
         	var cityCircle = new google.maps.Circle({
         	  strokeColor: 'black',
         	  strokeOpacity: 0.8,
@@ -68,14 +107,9 @@
         	    infoWindow.setPosition(ev.latLng); //<-- ev matches what you put ^ (mouse event)
         	    infoWindow.open(map);
         	});
-
-        	/*cityCircle.addListener('mouseout', function() {
-        		infoWindow.close();
-        	});*/
-        }
+        }*/
       }
     </script>
-
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlYgpCNxABlDdGj7h9TPvwe_guM3tBTEo&callback=initMap">
     </script>
