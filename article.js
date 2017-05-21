@@ -11,7 +11,13 @@ var urlToImage;
 var publishedAt;
 
 function article(article) {
-	this = JSON.parse(article)
+	let temp = JSON.parse(article)
+	this.author = temp.author;
+	this.title = temp.title;
+	this.description = temp.description;
+	this.url = temp.url;
+	this.urlToImage = temp.urlToImage;
+	this.publishedAt = temp.publishedAt;
 }
 
 function setImage(elementID) {

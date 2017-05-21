@@ -127,7 +127,7 @@ def start():
                   article = {}
                   article['article'] = a
                   article['weight'] = 1
-                  article['Location'] = b.name
+                  article['location'] = b.name
                   articles.append(article)
                   # print(a['title'], b.name)
 
