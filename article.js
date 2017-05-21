@@ -10,14 +10,8 @@ var urlToImage;
 
 var publishedAt;
 
-var weight;
-
-var locale[];
-
-function article(article, weight, locale[]) {
+function article(article) {
 	this = JSON.parse(article)
-	this.weight = weight;
-	this.locale[] = locale;
 }
 
 function setImage(elementID) {
