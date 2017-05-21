@@ -15,6 +15,9 @@
         padding: 0;
       }
     </style>
+      <link rel="stylesheet" type="text/css" href="main.css">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+<title>News Maps</title>
   </head>
   <body>
     <div id="map"></div>
@@ -39,7 +42,6 @@
       }
     };*/
     var cities = ['seattle, us', 'miami, fl', 'kansas', 'sri lanka'];
-
       var map;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -47,30 +49,22 @@
           center: {lat: 0, lng: 0},
           mapTypeId: 'satellite'
         });
-
         // Create a <script> tag and set the USGS URL as the source.
         //var script = document.createElement('script');
+        var count = 0;
         var infoWindow = new google.maps.InfoWindow({
-<<<<<<< HEAD
-        	content: '<h1 = id="article-name"> </h1>' +
-        			 '<img id="article-img">' +
-        			 '<p id="description"></p>' +
-        			 '<p id="link"><a></a></p>' +
-        			 '<p id="image-url"><a href=""></a></p>' +
-        			 '<p id="where-published"></p>' +
-        			 'Test'
-
-=======
-        	content: "News Title: "
->>>>>>> e88f68a726f8f8ec2c0f2de3def88b5f24276b38
+          /*content: '<h1 = id="article-name"> </h1>' +
+               '<img id="article-img">' +
+               '<p id="description"></p>' +
+               '<p id="link"><a></a></p>' +
+               '<p id="image-url"><a href=""></a></p>' +
+               '<p id="where-published"></p>' +
+               'Filler'*/
         });
-        
         var geocoder = new google.maps.Geocoder();
         for (var city in cities) {
         geocoder.geocode({'address': cities[city]}, function(results, status) {
-
           if (status == google.maps.GeocoderStatus.OK) {
-
             //map.setCenter(results[0].geometry.location);
             var cityCircle = new google.maps.Circle({
               strokeColor: 'black',
@@ -80,33 +74,40 @@
               fillOpacity: 0.35,
               map: map,
               center: results[0].geometry.location,
-              radius: 500000
+              radius: 250000
             });
             google.maps.event.addListener(cityCircle, 'mouseover', function(ev){
                 infoWindow.setPosition(ev.latLng); //<-- ev matches what you put ^ (mouse event)
+                infoWindow.setContent(results[0].formatted_address + 
+                  '<h1 = id="article-name"> </h1>' +
+               '<img id="article-img">' +
+               '<p id="description"></p>' +
+               '<p id="link"><a></a></p>' +
+               '<p id="image-url"><a href=""></a></p>' +
+               '<p id="where-published"></p>' +
+               'Filler stuff' + "<br>" +
+               '<a href="https://www.google.com">Read More...</a>');
                 infoWindow.open(map);
             });
             //map.setZoom(10);
           }
         });
       }
-
         /*for (var city in citymap) {
-        	var cityCircle = new google.maps.Circle({
-        	  strokeColor: 'black',
-        	  strokeOpacity: 0.8,
-        	  strokeWeight: 2,
-        	  fillColor: 'red',
-        	  fillOpacity: 0.35,
-        	  map: map,
-        	  center: citymap[city].center,
-        	  radius: Math.sqrt(citymap[city].population) * 100
-        	});
-
-        	google.maps.event.addListener(cityCircle, 'mouseover', function(ev){
-        	    infoWindow.setPosition(ev.latLng); //<-- ev matches what you put ^ (mouse event)
-        	    infoWindow.open(map);
-        	});
+          var cityCircle = new google.maps.Circle({
+            strokeColor: 'black',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: 'red',
+            fillOpacity: 0.35,
+            map: map,
+            center: citymap[city].center,
+            radius: Math.sqrt(citymap[city].population) * 100
+          });
+          google.maps.event.addListener(cityCircle, 'mouseover', function(ev){
+              infoWindow.setPosition(ev.latLng); //<-- ev matches what you put ^ (mouse event)
+              infoWindow.open(map);
+          });
         }*/
       }
     </script>
