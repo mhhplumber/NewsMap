@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+	<title>News Maps</title>
   <h1> NewsMap </h1>
     <style>
       /* Always set the map height explicitly to define the size of the div
@@ -49,7 +52,13 @@
         // Create a <script> tag and set the USGS URL as the source.
         //var script = document.createElement('script');
         var infoWindow = new google.maps.InfoWindow({
-        	content: "News Title: "
+        	content: '<h1 = id="article-name"> </h1>' +
+        			 '<img id="article-img">' +
+        			 '<p id="description"></p>' +
+        			 '<p id="link"><a></a></p>' +
+        			 '<p id="image-url"><a href=""></a></p>' +
+        			 '<p id="where-published"></p>'
+
         });
 
         for (var city in citymap) {
