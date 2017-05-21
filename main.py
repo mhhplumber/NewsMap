@@ -101,12 +101,12 @@ app = Flask(__name__);
 # The text to analyze
 @app.route('/res.json')
 def start():
-  res = "";
+  articles = []
   call = requests.get('https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=b506a06468994fcc9ed9f55451000921')
   payload = json.loads(call.text)
       # print(payload)
   if payload['status'] != 'error':
-    print(payload['source'])
+    # print(payload['source'])
     for a in payload['articles']:
           text = a['title'] #'Jet collides with truck at LAX'
           document = language_client.document_from_text(text)
@@ -115,7 +115,7 @@ def start():
           # sentiment = document.analyze_sentiment().sentiment
 
           # print(document.analyze_sentiment())
-          print('Text: {}'.format(text))
+          # print('Text: {}'.format(text))
           # print('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
           try:
               entities = document.analyze_entities().entities
@@ -129,7 +129,7 @@ def start():
                   article['weight'] = 1
                   article['Location'] = b.name
                   articles.append(article)
-                  print(a['title'], b.name)
+                  # print(a['title'], b.name)
 
   # with open('data.txt', 'w') as outfile:
   return json.dumps(articles);
