@@ -1,5 +1,7 @@
 import json, requests, nltk
 from textblob import TextBlob
+from google.cloud import language
+from flask import Flask
 
 """
 'breitbart-news',
@@ -85,35 +87,38 @@ sources= ['abc-news-au',
 #         for a in payload['articles']:
 #             print('\t' + a['title'])
 
-# Imports the Google Cloud client library
-from google.cloud import language
-
 # Instantiates a client
 language_client = language.Client()
 
+flask_request_handler = Flask(reqHandler);
+from flask_request_handler import views;
+
 # The text to analyze
+@flask_request_handler.route('/')
+def start():
+  res = "";
+  call = requests.get('https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=b506a06468994fcc9ed9f55451000921')
+  payload = json.loads(call.text)
+      # print(payload)
+  if payload['status'] != 'error':
+      print(payload['source'])
+      for a in payload['articles']:
+          # print('\t' + a['title'])
 
-call = requests.get('https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=b506a06468994fcc9ed9f55451000921')
-payload = json.loads(call.text)
-    # print(payload)
-if payload['status'] != 'error':
-    print(payload['source'])
-    for a in payload['articles']:
-        # print('\t' + a['title'])
+          text = a['title'] #'Jet collides with truck at LAX'
+          document = language_client.document_from_text(text)
 
-        text = a['title'] #'Jet collides with truck at LAX'
-        document = language_client.document_from_text(text)
+          # Detects the sentiment of the text
+          sentiment = document.analyze_sentiment().sentiment
 
-        # Detects the sentiment of the text
-        sentiment = document.analyze_sentiment().sentiment
-
-        # print(document.analyze_sentiment())
-        print('Text: {}'.format(text))
-        # print('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
+          # print(document.analyze_sentiment())
+          res += 'Text: {}'.format(text)
+          # print('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
 
 
-        entities = document.analyze_entities().entities
+          entities = document.analyze_entities().entities
 
-        for a in entities:
-            print('\t', a.name, a.entity_type)
-# print(entities[0].__dict__)
+          for a in entities:
+              res += ('\t', a.name, a.entity_type)
+  return res;
+  # print(entities[0].__dict__)
