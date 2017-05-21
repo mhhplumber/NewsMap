@@ -20,6 +20,11 @@ from flask import Flask
 'wirtschafts-woche'
 """
 
+call = requests.get('https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest&apiKey=b506a06468994fcc9ed9f55451000921')
+payload = json.loads(call.text)
+
+print(payload)
+
 sources= ['abc-news-au',
           'al-jazeera-english',
           'ars-technica',
@@ -87,9 +92,6 @@ sources= ['abc-news-au',
 #         for a in payload['articles']:
 #             print('\t' + a['title'])
 
-# Imports the Google Cloud client library
-from google.cloud import language
-
 # Instantiates a client
 language_client = language.Client()
 
@@ -99,6 +101,7 @@ from flask_request_handler import views;
 # The text to analyze
 @flask_request_handler.route('/')
 def start():
+  res = "";
   call = requests.get('https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=b506a06468994fcc9ed9f55451000921')
   payload = json.loads(call.text)
       # print(payload)
@@ -114,12 +117,13 @@ def start():
           sentiment = document.analyze_sentiment().sentiment
 
           # print(document.analyze_sentiment())
-          print('Text: {}'.format(text))
+          res += 'Text: {}'.format(text)
           # print('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
 
 
           entities = document.analyze_entities().entities
 
           for a in entities:
-              print('\t', a.name, a.entity_type)
+              res += ('\t', a.name, a.entity_type)
+  return res;
   # print(entities[0].__dict__)
