@@ -18,6 +18,14 @@ from textblob import TextBlob
 'wirtschafts-woche'
 """
 
+<<<<<<< e88f68a726f8f8ec2c0f2de3def88b5f24276b38
+=======
+call = requests.get('https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest&apiKey=b506a06468994fcc9ed9f55451000921')
+payload = json.loads(call.text)
+
+print(payload)
+
+>>>>>>> First to fancifier
 sources= ['abc-news-au',
           'al-jazeera-english',
           'ars-technica',
@@ -114,6 +122,18 @@ if payload['status'] != 'error':
 
         entities = document.analyze_entities().entities
 
+<<<<<<< HEAD
+for api in sources:
+    # print('https://newsapi.org/v1/articles?source=' + api + '&sortBy=latest&apiKey=b506a06468994fcc9ed9f55451000921')
+    call = requests.get('https://newsapi.org/v1/articles?source=' + api + '&sortBy=latest&apiKey=b506a06468994fcc9ed9f55451000921')
+    payload = json.loads(call.text)
+<<<<<<< e88f68a726f8f8ec2c0f2de3def88b5f24276b38
+    print(payload)
+=======
+    print(payload)
+>>>>>>> First to fancifier
+=======
         for a in entities:
             print('\t', a.name, a.entity_type)
 # print(entities[0].__dict__)
+>>>>>>> f5619209d744ee1d0a1dfb012dd3eea4cf813dda
