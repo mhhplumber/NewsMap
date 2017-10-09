@@ -59,7 +59,7 @@
       var map;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 2,
+          zoom: 2.3,
           center: {lat: 0, lng: 0},
           mapTypeId: 'satellite'
         });
@@ -83,7 +83,7 @@
               strokeColor: 'white',
               strokeOpacity: 0.8,
               strokeWeight:1,
-              fillColor: 'red',
+              fillColor: 'green',
               fillOpacity: 0.35,
               map: map,
               center: results[0].geometry.location,
